@@ -15,13 +15,12 @@ int main(void) {
     init();
 
     unsigned long *arbitrary_read_loc;
-    read(STDIN_FILENO, &arbitrary_read_loc, sizeof(*arbitrary_read_loc)); 
+    read(STDIN_FILENO, &arbitrary_read_loc, sizeof(arbitrary_read_loc));
 
-    write(STDOUT_FILENO, (void *) arbitrary_read_loc, sizeof(arbitrary_read_loc));
+    write(STDOUT_FILENO, arbitrary_read_loc, sizeof(*arbitrary_read_loc));
 
     Fn_Ptr arbitrary_call_loc;
-    read(STDIN_FILENO, (void *) &arbitrary_call_loc, sizeof(arbitrary_call_loc)); 
-    printf("arbitrary_call_loc 0x%p\n", arbitrary_call_loc);
+    read(STDIN_FILENO, &arbitrary_call_loc, sizeof(arbitrary_call_loc));
 
     arbitrary_call_loc();
 }
